@@ -1,0 +1,4 @@
+---
+bind_acls: []
+bind_recursion: false
+bind_allow_query: [ 'localhost' ]

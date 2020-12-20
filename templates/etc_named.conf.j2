@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+
+{% for acl in bind_acls %}
+acl "{{ acl.name }}" {
+{% for match in acl.match_list %}
+  {{ match }};
+{% endfor %}
+};
+{% endfor %}
+
+options {
+  directory "{{ bind_dir }}";
+  pid-file "{{ bind_pid_file }}";
+
+  recursion {{ bind_recursion }};
+  allow-query { {{ bind_allow_query | join('; ') }}; };
+};
+
+{% for zone_file in bind_default_zone_files %}
+include "{{ zone_file }}";
+{% endfor %}

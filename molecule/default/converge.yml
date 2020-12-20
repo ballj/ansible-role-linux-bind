@@ -1,0 +1,27 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - ansible-role-linux-bind
+  vars:
+    bind_acls:
+      - name: acl_1
+        match_list:
+          - 10.0.0.0/24
+          - 10.0.1.0/24
+          - 10.0.2.0/24
+      - name: acl_2
+        match_list:
+          - 10.1.0.0/16
+          - 10.2.0.0/16
+      - name: acl_3
+        match_list:
+          - 10.3.0.0/16
+          - 10.4.0.0/16
+      - name: docker
+        match_list:
+          - 172.17.0.0/24
+    bind_allow_query:
+      - localhost
+      - docker
+    bind_recursion: true
