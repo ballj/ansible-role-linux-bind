@@ -20,6 +20,7 @@ not auto apply themselves.
 | `- type`                    | n/a                                   | Type of zonefile. Currently supports [`slave`]                                                                      |
 | `- masters`                 | n/a                                   | A list of masters for the zone. Strings can be used to configure extra options. A master-list can be used.          |
 | `- masters`                 | n/a                                   | A list of servers allowed to perform zone transfer. Strings can be used to configure extra options.                 |
+| `bind_tsig_keys`            | `[]`                                  | A list of TSIG keys to add. See below for an example.                                                               |
 
 # Examples
 
@@ -45,3 +46,17 @@ bind_zones:
 
 `auto`: Uses built-in managed keys
 `yes`: Requires manually configured `trusted-keys` or `managed-keys`
+
+# TSIG
+
+## Define Keys
+
+Any keys in the `bind_tsig_keys` variable will be added to the named config.
+They will not be applied to any zones or servers automatically.
+
+```bash
+    bind_tsig_keys:
+      - name: tsig_example
+        algorithm: hmac-md5
+        secret: 'mZiMNOUYQPMNwsDzrX2ENw=='
+```
