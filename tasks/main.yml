@@ -14,6 +14,7 @@
   with_items:
     - "{{ bind_packages }}"
   tags: bind
+  become: true
 
 - name: Configure BIND
   template:
@@ -25,3 +26,4 @@
     validate: 'named-checkconf %s'
   notify: reload bind
   tags: bind
+  become: true
