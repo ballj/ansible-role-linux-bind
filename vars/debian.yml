@@ -1,0 +1,21 @@
+---
+bind_packages:
+  - bind9
+  - bind9utils
+
+#Files
+bind_config: /etc/bind/named.conf
+bind_default_zone_files:
+  - /etc/bind/named.conf.default-zones
+bind_pid_file: /run/named/named.pid
+
+# Runtime Directory
+bind_dir: /var/cache/bind
+bind_conf_dir: /etc/bind
+
+# Permissions
+bind_owner: root
+bind_group: bind
+
+# Service
+bind_service: named
