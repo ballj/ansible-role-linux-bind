@@ -11,6 +11,8 @@ not auto apply themselves.
 | Variable                    | Default              | Comments (type)                                                                                                                      |
 |:----------------------------|:---------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `bind_acls`                 | `[]`                 | A list of ACL definitions.                                                                                                           |
+| `bind_dnssec_enable`        | `true                | Enable dnssec globally.                                                                                                              |
+| `bind_dnssec_validation`    | `auto`               | Enable dnssec using auto trust. See explanation below.                                                                               |
 | `bind_zones`                | n/a                  | A list of mappings with zone definitions. See below this table for examples                                                          |
 | `- name`                    | n/a                  | Name of the zonefile                                                                                                                 |
 | `- type`                    | n/a                  | Type of zonefile. Currently supports [`slave`]                                                                                       |
@@ -32,3 +34,12 @@ bind_zones:
     also_nofify: ['10.0.0.5', '10.0.0.6']
     allow_transfer: ['10.0.0.5'. '10.0.0.6']
 ```
+
+# DNSSEC
+
+## DNSSEC Validation
+
+[ISC Article](https://kb.isc.org/docs/aa-01547)
+
+`auto`: Uses built-in managed keys
+`yes`: Requires manually configured `trusted-keys` or `managed-keys`

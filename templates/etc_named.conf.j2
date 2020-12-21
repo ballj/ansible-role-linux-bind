@@ -12,6 +12,9 @@ options {
   directory "{{ bind_dir }}";
   pid-file "{{ bind_pid_file }}";
 
+  dnssec-enable {{ bind_dnssec_enable }};
+  dnssec-validation {{ bind_dnssec_validation }};
+
   recursion {{ bind_recursion }};
   allow-query { {{ bind_allow_query | join('; ') }}; };
   allow-transfer { {{ bind_allow_transfer | join('; ') }}; };
