@@ -1,4 +1,10 @@
 ---
+bind_listen_ipv4:
+  - port: 53
+    match_list: ['any']
+bind_listen_ipv6:
+  - port: 53
+    match_list: ['any']
 bind_acls: []
 bind_recursion: false
 bind_allow_query: [ 'localhost' ]

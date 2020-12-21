@@ -24,6 +24,11 @@
     bind_allow_query:
       - localhost
       - docker
+    bind_listen_ipv4:
+      - port: 53
+        match_list: ['any']
+      - port: 5353
+        match_list: ['any']
     bind_recursion: true
     bind_tsig_keys:
       - name: tsig_example

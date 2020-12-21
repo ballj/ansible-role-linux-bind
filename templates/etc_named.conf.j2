@@ -12,6 +12,13 @@ options {
   directory "{{ bind_dir }}";
   pid-file "{{ bind_pid_file }}";
 
+{% for listen_ipv4 in bind_listen_ipv4 %}
+  listen-on port {{ listen_ipv4.port }} { {{ listen_ipv4.match_list | join('; ') }}; };
+{% endfor %}
+{% for listen_ipv6 in bind_listen_ipv6 %}
+  listen-on-v6 port {{ listen_ipv6.port }} { {{ listen_ipv6.match_list | join('; ') }}; };
+{% endfor %}
+
   dnssec-enable {{ bind_dnssec_enable }};
   dnssec-validation {{ bind_dnssec_validation }};
 
