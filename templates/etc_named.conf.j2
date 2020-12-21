@@ -19,3 +19,10 @@ options {
 {% for zone_file in bind_default_zone_files %}
 include "{{ zone_file }}";
 {% endfor %}
+
+{% for key in bind_tsig_keys %}
+key "{{ key.name }}" {
+  algorithm {{ key.algorithm }};
+  secret "{{ key.secret }}";
+};
+{% endfor %}

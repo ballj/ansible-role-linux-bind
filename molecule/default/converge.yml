@@ -25,3 +25,7 @@
       - localhost
       - docker
     bind_recursion: true
+    bind_tsig_keys:
+      - name: tsig_example
+        algorithm: hmac-md5
+        secret: 'mZiMNOUYQPMNwsDzrX2ENw=='
