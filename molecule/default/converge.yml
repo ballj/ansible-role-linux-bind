@@ -37,3 +37,4 @@
           - 127.0.0.2 key "tsig_example"
         allow_notify: ['127.0.0.3', '127.0.0.4']
         also_notify: ['127.0.0.4', '127.0.0.5']
+        allow_transfer: ['127.0.0.4', '127.0.0.5']

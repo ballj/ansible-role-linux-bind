@@ -14,6 +14,7 @@ options {
 
   recursion {{ bind_recursion }};
   allow-query { {{ bind_allow_query | join('; ') }}; };
+  allow-transfer { {{ bind_allow_transfer | join('; ') }}; };
 };
 
 {% for zone_file in bind_default_zone_files %}
@@ -41,6 +42,9 @@ zone {{ zone.name | quote }} {{ zone.class | default ('IN') }} {
 {% endif %}
 {% if zone.also_notify is defined %}
   also-notify { {{ zone.also_notify | join('; ') }}; };
+{% endif %}
+{% if zone.allow_transfer is defined %}
+  allow-transfer { {{ zone.allow_transfer | join('; ') }}; };
 {% endif %}
 };
 
