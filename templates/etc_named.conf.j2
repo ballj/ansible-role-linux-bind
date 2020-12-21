@@ -26,3 +26,22 @@ key "{{ key.name }}" {
   secret "{{ key.secret }}";
 };
 {% endfor %}
+
+{% for zone in bind_zones %}
+zone {{ zone.name | quote }} {{ zone.class | default ('IN') }} {
+  type {{ zone.type }};
+{% if zone.type == 'master' %}
+  file "{{ bind_master_zones_dir }}/{{ zone.name }}";
+{% elif zone.type == 'slave' %}
+  file "{{ bind_slave_zones_dir }}/{{ zone.name }}";
+{% endif %}
+  masters { {{ zone.masters | join('; ') }}; };
+{% if zone.type == 'slave' and zone.allow_notify is defined %}
+  allow-notify { {{ zone.allow_notify | join('; ') }}; };
+{% endif %}
+{% if zone.also_notify is defined %}
+  also-notify { {{ zone.also_notify | join('; ') }}; };
+{% endif %}
+};
+
+{% endfor %}

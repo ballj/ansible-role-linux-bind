@@ -2,4 +2,7 @@
 bind_acls: []
 bind_recursion: false
 bind_allow_query: [ 'localhost' ]
+bind_zones: []
 bind_tsig_keys: []
+bind_master_zones_dir: "{{ bind_conf_dir }}/zones }}"
+bind_slave_zones_dir: "{{ bind_dir }}/slave_zones }}"

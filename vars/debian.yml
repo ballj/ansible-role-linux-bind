@@ -9,7 +9,7 @@ bind_default_zone_files:
   - /etc/bind/named.conf.default-zones
 bind_pid_file: /run/named/named.pid
 
-# Runtime Directory
+# Directories
 bind_dir: /var/cache/bind
 bind_conf_dir: /etc/bind
 

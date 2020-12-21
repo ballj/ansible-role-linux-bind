@@ -29,3 +29,11 @@
       - name: tsig_example
         algorithm: hmac-md5
         secret: 'mZiMNOUYQPMNwsDzrX2ENw=='
+    bind_zones:
+      - name: example.com
+        type: slave
+        masters:
+          - 127.0.0.1
+          - 127.0.0.2 key "tsig_example"
+        allow_notify: ['127.0.0.3', '127.0.0.4']
+        also_notify: ['127.0.0.4', '127.0.0.5']
