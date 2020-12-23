@@ -26,6 +26,13 @@ options {
   allow-recursion { {{ bind_allow_recursion | join('; ') }}; };
   allow-query { {{ bind_allow_query | join('; ') }}; };
   allow-transfer { {{ bind_allow_transfer | join('; ') }}; };
+
+{% if bind_notify_source_v4 is defined %}
+  notify-source {{ bind_notify_source_v4 }};
+{% endif %}
+{% if bind_notify_source_v6 is defined %}
+  notify-source-v6 {{ bind_notify_source_v6 }};
+{% endif %}
 };
 
 {% for zone_file in bind_default_zone_files %}
@@ -56,6 +63,12 @@ zone {{ zone.name | quote }} {{ zone.class | default ('IN') }} {
 {% endif %}
 {% if zone.allow_transfer is defined %}
   allow-transfer { {{ zone.allow_transfer | join('; ') }}; };
+{% endif %}
+{% if zone.notify_source_v4 is defined %}
+  notify-source {{ zone.notify_source_v4 }};
+{% endif %}
+{% if zone.notify_source_v6 is defined %}
+  notify-source-v6 {{ zone.notify_source_v6 }};
 {% endif %}
 };
 

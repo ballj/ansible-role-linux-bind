@@ -16,6 +16,8 @@ Including disable of recursion and ACL on the query/recursion functions.
 | `bind_listen_ipv4`          | `[{'port':'53','match_list:['any']}]` | A list of ports and IPv4 addresses to listen on.                                                                    |
 | `bind_listen_ipv6`          | `[{'port':'53','match_list:['any']}]` | A list of IPv6 addresses to listen on. Can set match_list to `['none']`                                             |
 | `bind_acls`                 | `[]`                                  | A list of ACL definitions.                                                                                          |
+| `bind_notify_source_v4`     | n/a                                   | Global notify source. Must be in the masters list of the slave server or allow-notify.                              |
+| `bind_notify_source_v6`     | n/a                                   | Global notify source. Must be in the masters list of the slave server or allow-notify.                              |
 | `bind_allow_query   `       | `['localhost']`                       | ACL for the global allow query option.                                                                              |
 | `bind_allow_transfer`       | `['none']`                            | ACL for the global allow transfer option.                                                                           |
 | `bind_recursion`            | `false`                               | Global recursion option.                                                                                            |
@@ -27,6 +29,8 @@ Including disable of recursion and ACL on the query/recursion functions.
 | `- type`                    | n/a                                   | Type of zonefile. Currently supports [`slave`]                                                                      |
 | `- masters`                 | n/a                                   | A list of masters for the zone. Strings can be used to configure extra options. A master-list can be used.          |
 | `- masters`                 | n/a                                   | A list of servers allowed to perform zone transfer. Strings can be used to configure extra options.                 |
+| `- notify_source_v4`        | n/a                                   | Notify source for the zone. Must be in the masters list of the slave server or allow-notify.                        |
+| `- notify_source_v6`        | n/a                                   | Notify source for the zone. Must be in the masters list of the slave server or allow-notify.                        |
 | `bind_tsig_keys`            | `[]`                                  | A list of TSIG keys to add. See below for an example.                                                               |
 
 # Examples
@@ -43,6 +47,8 @@ bind_zones:
     allow_notify: ['10.0.0.3', '10.0.0.4']
     also_nofify: ['10.0.0.5', '10.0.0.6']
     allow_transfer: ['10.0.0.5'. '10.0.0.6']
+    notify_source_v4: 127.0.0.11
+    notify_source_v6: '::1'
 ```
 
 # DNSSEC
