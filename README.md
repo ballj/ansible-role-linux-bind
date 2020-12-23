@@ -6,6 +6,9 @@ Configures the Bind DNS server.
 This role does not try to guess any server configuration. ACLs for example will
 not auto apply themselves.
 
+The role will configure the bind server as secure as reasonably possible.
+Including disable of recursion and ACL on the query/recursion functions.
+
 # Role Variables
 
 | Variable                    | Default              | Comments (type)                                                                                                                      |
@@ -13,6 +16,10 @@ not auto apply themselves.
 | `bind_listen_ipv4`          | `[{'port':'53','match_list:['any']}]` | A list of ports and IPv4 addresses to listen on.                                                                    |
 | `bind_listen_ipv6`          | `[{'port':'53','match_list:['any']}]` | A list of IPv6 addresses to listen on. Can set match_list to `['none']`                                             |
 | `bind_acls`                 | `[]`                                  | A list of ACL definitions.                                                                                          |
+| `bind_allow_query   `       | `['localhost']`                       | ACL for the global allow query option.                                                                              |
+| `bind_allow_transfer`       | `['none']`                            | ACL for the global allow transfer option.                                                                           |
+| `bind_recursion`            | `false`                               | Global recursion option.                                                                                            |
+| `bind_allow_recursion`      | `['none']`                            | ACL for the global allow recursion option.                                                                          |
 | `bind_dnssec_enable`        | `true                                 | Enable dnssec globally.                                                                                             |
 | `bind_dnssec_validation`    | `auto`                                | Enable dnssec using auto trust. See explanation below.                                                              |
 | `bind_zones`                | n/a                                   | A list of mappings with zone definitions. See below this table for examples                                         |

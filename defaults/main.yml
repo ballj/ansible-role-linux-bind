@@ -7,6 +7,7 @@ bind_listen_ipv6:
     match_list: ['any']
 bind_acls: []
 bind_recursion: false
+bind_allow_recursion: ['none']
 bind_allow_query: [ 'localhost' ]
 bind_zones: []
 bind_tsig_keys: []
