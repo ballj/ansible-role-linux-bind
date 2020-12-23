@@ -11,8 +11,8 @@ bind_allow_recursion: ['none']
 bind_allow_query: [ 'localhost' ]
 bind_zones: []
 bind_tsig_keys: []
-bind_master_zones_dir: "{{ bind_conf_dir }}/zones }}"
-bind_slave_zones_dir: "{{ bind_dir }}/slave_zones }}"
+bind_master_zones_dir: "{{ bind_conf_dir }}/zones"
+bind_slave_zones_dir: "{{ bind_dir }}/slave_zones"
 bind_allow_transfer: ['none']
 bind_dnssec_enable: true
 bind_dnssec_validation: auto
