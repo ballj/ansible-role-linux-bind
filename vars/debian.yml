@@ -18,4 +18,4 @@ bind_owner: root
 bind_group: bind
 
 # Service
-bind_service: named
+bind_service: bind9
