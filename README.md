@@ -11,7 +11,7 @@ Including disable of recursion and ACL on the query/recursion functions.
 
 # Role Variables
 
-| Variable                    | Default              | Comments (type)                                                                                                                      |
+| Variable                    | Default                               | Comments (type)                                                                                                    |
 |:----------------------------|:--------------------------------------|:--------------------------------------------------------------------------------------------------------------------|
 | `bind_listen_ipv4`          | `[{'port':'53','match_list:['any']}]` | A list of ports and IPv4 addresses to listen on.                                                                    |
 | `bind_listen_ipv6`          | `[{'port':'53','match_list:['any']}]` | A list of IPv6 addresses to listen on. Can set match_list to `['none']`                                             |
@@ -24,14 +24,31 @@ Including disable of recursion and ACL on the query/recursion functions.
 | `bind_allow_recursion`      | `['none']`                            | ACL for the global allow recursion option.                                                                          |
 | `bind_dnssec_enable`        | `true                                 | Enable dnssec globally.                                                                                             |
 | `bind_dnssec_validation`    | `auto`                                | Enable dnssec using auto trust. See explanation below.                                                              |
-| `bind_zones`                | n/a                                   | A list of mappings with zone definitions. See below this table for examples                                         |
+| `bind_zones`                | n/a                                   | A list of mappings with zone definitions. See below this table for examples and additional options.                 |
 | `- name`                    | n/a                                   | Name of the zonefile                                                                                                |
-| `- type`                    | n/a                                   | Type of zonefile. Currently supports [`slave`]                                                                      |
+| `- type`                    | n/a                                   | Type of zonefile.                                                                                                   |
+| `bind_tsig_keys`            | `[]`                                  | A list of TSIG keys to add. See below for an example.                                                               |
+
+## Zone Variables
+
+The role currently supports slave and forward zone types. Below are the variables supported by each zone type.
+
+### Slave Zone
+
+| Variable                    | Default                               | Comments (type)                                                                                                     |
+|:----------------------------|:--------------------------------------|:--------------------------------------------------------------------------------------------------------------------|
+| `- type`                    | n/a                                   | Type of zonefile. Set to `slave` for slave zone.                                                                    |
 | `- masters`                 | n/a                                   | A list of masters for the zone. Strings can be used to configure extra options. A master-list can be used.          |
 | `- masters`                 | n/a                                   | A list of servers allowed to perform zone transfer. Strings can be used to configure extra options.                 |
 | `- notify_source_v4`        | n/a                                   | Notify source for the zone. Must be in the masters list of the slave server or allow-notify.                        |
 | `- notify_source_v6`        | n/a                                   | Notify source for the zone. Must be in the masters list of the slave server or allow-notify.                        |
-| `bind_tsig_keys`            | `[]`                                  | A list of TSIG keys to add. See below for an example.                                                               |
+
+### Forward Zone
+
+| Variable                    | Default                               | Comments (type)                                                                                                     |
+|:----------------------------|:--------------------------------------|:--------------------------------------------------------------------------------------------------------------------|
+| `- type`                    | n/a                                   | Type of zonefile. Set to `forward` for forward zone.                                                                |
+| `- forward_only`            | `false`                               | Set true to enable `forward-only` mode. In this mode BIND will not contact other nameservers if forward fails.      |
 
 # Examples
 

@@ -49,6 +49,14 @@ key "{{ key.name }}" {
 {% for zone in bind_zones %}
 zone {{ zone.name | quote }} {{ zone.class | default ('IN') }} {
   type {{ zone.type }};
+{% if zone.type == 'forward' %}
+{% if zone.forward_only is defined and zone.forward_only %}
+  forward only;
+{% else %}
+  forward first;
+{% endif %}
+  forwarders { {{ zone.forwarders | join('; ') }}; };
+{% else %}
 {% if zone.type == 'master' %}
   file "{{ bind_master_zones_dir }}/{{ zone.name }}";
 {% elif zone.type == 'slave' %}
@@ -69,6 +77,7 @@ zone {{ zone.name | quote }} {{ zone.class | default ('IN') }} {
 {% endif %}
 {% if zone.notify_source_v6 is defined %}
   notify-source-v6 {{ zone.notify_source_v6 }};
+{% endif %}
 {% endif %}
 };
 
