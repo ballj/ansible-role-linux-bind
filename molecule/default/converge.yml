@@ -44,4 +44,15 @@
         also_notify: ['127.0.0.4', '127.0.0.5']
         allow_transfer: ['127.0.0.4', '127.0.0.5']
         notify_source_v4: 127.0.0.11
+      - name: forward_first.com
+        type: forward
+        forwarders:
+          - 8.8.8.8
+          - 8.8.4.4
+      - name: forward_only.com
+        type: forward
+        forward_only: true
+        forwarders:
+          - 8.8.8.8
+          - 8.8.4.4
     bind_notify_source_v4: 127.0.0.10
